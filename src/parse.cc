@@ -1,6 +1,7 @@
 #include "parse.h"
 
 #include <iostream>
+#include <sstream>
 
 const char *Token::type_name_s = "token";
 const char *Parse::type_name_s = "parse";
@@ -49,8 +50,10 @@ int Token::luaopen(lua_State *L)
 int Parse::luaopen(lua_State *L)
 {
   static const luaL_Reg m[] = {
-    { "__gc",  l_gc  },
-    { "__len", l_len },
+    { "__gc",    l_gc  },
+    { "__len",   l_len },
+    { "str",     l_str },
+    { "replace", l_replace },
     { }
   };
   
@@ -65,6 +68,50 @@ Parse::~Parse()
     l->set_index(-1);
     l->unref();
   }
+}
+
+int Parse::replace(int start, int end, std::string source)
+{
+  std::vector<Token *> toks;
+  do_parse(source, toks);
+  if(toks[0]->ws() == "")
+    toks[0]->set_ws(tokens[start-1]->ws());
+  for(int i = start-1; i < end; i++)
+    tokens[i]->unref();
+  tokens.erase(tokens.begin() + start - 1, tokens.begin() + end);
+  tokens.insert(tokens.begin() + start - 1, toks.begin(), toks.end());
+  for(unsigned int i = start - 1; i != tokens.size(); i++)
+    tokens[i]->set_index(i);
+  int epos = start + toks.size() - 1;
+  return epos;
+}
+
+std::string Parse::str() const
+{
+  std::ostringstream out;
+  for(Token *l : tokens)
+    out << l->txt();
+  return out.str();
+}
+
+int Parse::l_replace(lua_State *L)
+{
+  Parse *p = getparam(L, 1);
+  luaL_argcheck(L, lua_isnumber(L, 2), 2, "start position expected");
+  luaL_argcheck(L, lua_isnumber(L, 3), 3, "end position expected");
+  luaL_argcheck(L, lua_isstring(L, 4), 4, "replacement string expected");
+
+  int pos = p->replace(lua_tointeger(L, 2), lua_tointeger(L, 3), lua_tostring(L, 4));
+  lua_pushnumber(L, pos);
+  return 1;
+}
+
+int Parse::l_str(lua_State *L)
+{
+  Parse *p = getparam(L, 1);
+  const auto &str = p->str();
+  lua_pushlstring(L, str.data(), str.size());
+  return 1;
 }
 
 int Parse::l_len(lua_State *L)
@@ -87,8 +134,8 @@ int Parse::l_index(lua_State *L)
   return 1;
 }
 
-Token::Token(std::string _ws, std::string _token, int _line, int _col, int _index) :
-  ws(_ws), token(_token), line(_line), col(_col), index(_index)
+Token::Token(std::string _ws, std::string _token, int _line, int _col) :
+  t_ws(_ws), t_token(_token), line(_line), col(_col), index(-1)
 {
 }
 
@@ -104,11 +151,11 @@ int Token::l_index(lua_State *L)
     return 0;
   std::string field = lua_tostring(L, 2);
   if(field == "ws") {
-    lua_pushlstring(L, t->ws.data(), t->ws.size());
+    lua_pushlstring(L, t->t_ws.data(), t->t_ws.size());
     return 1;
   }
   if(field == "token") {
-    lua_pushlstring(L, t->token.data(), t->token.size());
+    lua_pushlstring(L, t->t_token.data(), t->t_token.size());
     return 1;
   }
   if(field == "line") {
@@ -188,7 +235,7 @@ void Parse::step(std::string::const_iterator &p, int &line, int &col) const
     col++;
 }
 
-Parse::Parse(std::string source)
+void Parse::do_parse(std::string source, std::vector<Token *> &toks)
 {
   auto p = source.cbegin();
   auto e = source.cend();
@@ -220,7 +267,7 @@ Parse::Parse(std::string source)
 
       // <> includes
       if(*p == '<') {
-	if(tokens.size() >= 2 && tokens.end()[-1]->t() == "include" && (tokens.end()[-2]->t() == "#" || tokens.end()[-2]->t() == "%:")) {
+	if(tokens.size() >= 2 && tokens.end()[-1]->token() == "include" && (tokens.end()[-2]->token() == "#" || tokens.end()[-2]->token() == "%:")) {
 	  while(p != e && *p != '>' && *p != '\n')
 	    step(p, line, col);
 	  if(p != e && *p == '>')
@@ -497,6 +544,13 @@ Parse::Parse(std::string source)
     }
 
   token_done:
-    tokens.push_back(new Token(ws, std::string(q, p), l, c, tokens.size()));
+    toks.push_back(new Token(ws, std::string(q, p), l, c));
   }
+}
+
+Parse::Parse(std::string source)
+{
+  do_parse(source, tokens);
+  for(unsigned int i=0; i != tokens.size(); i++)
+    tokens[i]->set_index(i);
 }

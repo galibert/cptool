@@ -47,6 +47,21 @@ function pick_parameter(lex, idx, number)
    return range_rebuild(lex, idx, idxe)
 end
 
+function unstring(str)
+   local i1, i2
+   for i=1,#str do
+      if str:sub(i, i) == "\"" then
+	 if not i1 then i1 = i end
+	 i2 = i
+      end
+   end
+   if i1 and i2 then
+      return str:sub(i1+1, i2-1)
+   else
+      return str
+   end
+end
+
 function filter_files(list, extensions)
    local r = {}
    for i=1, #list do
@@ -61,4 +76,63 @@ function filter_files(list, extensions)
       end
    end
    return r
+end
+
+inheritance_info = {}
+inheritance_info_i = {}
+function inheritance_load(file)
+   local f = io.open(file, "r")
+   for l in f:lines() do
+      local classes = {}
+      local clbase
+      for class in l:gmatch("%S+") do
+	 if clbase then
+	    if not inheritance_info_i[class] then
+	       inheritance_info_i[class] = {}
+	    end
+	    inheritance_info_i[class][#inheritance_info_i[class]+1] = clbase
+	    classes[#classes+1] = class
+	 else
+	    clbase = class
+	 end
+      end
+      inheritance_info[clbase] = classes
+   end
+end
+
+function inherits_from(class, parent)
+   local p = inheritance_info[class]
+   if p then
+      for i=1, #p do
+	 if p[i] == parent or inherits_from(p[i], parent) then
+	    return true
+	 end
+      end
+   end
+   return false
+end
+
+function list_derivatives_of(class)
+   local r = {}
+   for c, l in pairs(inheritance_info) do
+      local hit = false
+      for i=1,#l do
+	 if not hit and (l[i] == class or inherits_from(l[i], class)) then
+	    hit = true
+	 end
+      end
+      if hit then
+	 r[#r+1] = c
+      end
+   end
+   return r
+end
+
+function lmatch(lex, index, tokens)
+   for i=1,#tokens do
+      if tokens[i] == "" or lex[index+i-1].token ~= tokens[i] then
+	 return false
+      end
+   end
+   return true
 end

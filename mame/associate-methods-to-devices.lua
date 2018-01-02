@@ -1,7 +1,5 @@
 dofile("lib.lua")
 
---load_devlist("devices-in-drivers.txt")
-
 function mth_add(mthmap, method, map, mapclass)
    if not mthmap[method] then
       mthmap[method] = { { map = map, mapclass = mapclass } }
@@ -17,13 +15,16 @@ function mth_add(mthmap, method, map, mapclass)
 end
 
 function retrieve_devices_class_tags(cpumap, imports, mth, mc)
-   function add_to_result(r, class, tag)
-      for i = 1,#r do
-	 if r[i].class == class and r[i].tag == tag then
-	    return
+   function add_to_result(r, class, tags)
+      for j = 1,#tags do
+	 local tag = tags[j].cpu
+	 for i = 1,#r do
+	    if r[i].class == class and r[i].tag == tag then
+	       return
+	    end
 	 end
+	 r[#r+1] = { class = class, tag = tag }
       end
-      r[#r+1] = { class = class, tag = tag }
    end
 
    local r = {}
@@ -43,7 +44,7 @@ function retrieve_devices_class_tags(cpumap, imports, mth, mc)
 	 end
       end
       if cpumap[map] then
-	 add_to_result(r, mapclass, cpumap[map].cpu)
+	 add_to_result(r, mapclass, cpumap[map])
       elseif imports[map] then
 	 local r1 = retrieve_devices_class_tags(cpumap, imports, mth, imports[map])
 	 for j=1,#r1 do
@@ -55,6 +56,20 @@ function retrieve_devices_class_tags(cpumap, imports, mth, mc)
    end
 
    return r
+end
+
+function cpu_add(cpumap, map_name, mcfg, cpu)
+   local m = cpumap[map_name]
+   if not m then
+      m = {}
+      cpumap[map_name] = m
+   end
+   for i = 1, #m do
+      if m[i].mcfg == mcfg and m[i].cpu == cpu then
+	 return
+      end
+   end
+   m[#m+1] = { mcfg = mcfg, cpu = cpu }
 end
 
 files = filter_files(cp.scan(arg[1] .. "/src/mame/drivers"), { ".cpp", ".hxx", ".c", ".h", ".hpp" })
@@ -98,28 +113,28 @@ for j=1,#files do
       then
 	 map_name = pick_parameter(lex, i, 1)
 	 if map_name then
-	    cpumap[map_name] = { mcfg = mcfg_name, cpu = cpu_tag }
+	    cpu_add(cpumap, map_name, mcfg_name, cpu_tag)
 	 end
       end
       if t == "MCFG_DEVICE_ADDRESS_MAP" or t == "MCFG_CPU_ADDRESS_MAP" or t == "MCFG_GT64XXX_SET_CS" or t == "MCFG_PCI9050_SET_MAP" or t == "MCFG_VRC5074_SET_CS" then
 	 map_name = pick_parameter(lex, i, 2)
 	 if map_name then
-	    cpumap[map_name] = { mcfg = mcfg_name, cpu = cpu_tag }
+	    cpu_add(cpumap, map_name, mcfg_name, cpu_tag)
 	 end
       end
       if t == "MCFG_ABC1600_MAC_ADD" then
-	 cpumap[pick_parameter(lex, i, 2)] = { mcfg = mcfg_name, cpu = pick_parameter(lex, i, 1) }
+	 cpu_add(cpumap, pick_parameter(lex, i, 2), mcfg_name, pick_parameter(lex, i, 1))
       end
       if t == "MCFG_MOS7360_ADD" then
-	 cpumap[pick_parameter(lex, i, 5)] = { mcfg = mcfg_name, cpu = pick_parameter(lex, i, 1) }
+	 cpu_add(cpumap, pick_parameter(lex, i, 5), mcfg_name, pick_parameter(lex, i, 1))
       end
       if t == "MCFG_TMS99xx_ADD" or t == "MCFG_MOS656X_ATTACK_UFO_ADD" or t == "MCFG_MOS6560_ADD" then
-	 cpumap[pick_parameter(lex, i, 4)] = { mcfg = mcfg_name, cpu = pick_parameter(lex, i, 1) }
-	 cpumap[pick_parameter(lex, i, 5)] = { mcfg = mcfg_name, cpu = pick_parameter(lex, i, 1) }
+	 cpu_add(cpumap, pick_parameter(lex, i, 4), mcfg_name, pick_parameter(lex, i, 1))
+	 cpu_add(cpumap, pick_parameter(lex, i, 5), mcfg_name, pick_parameter(lex, i, 1))
       end
       if t == "MCFG_DAVE_ADD" then
-	 cpumap[pick_parameter(lex, i, 3)] = { mcfg = mcfg_name, cpu = pick_parameter(lex, i, 1) }
-	 cpumap[pick_parameter(lex, i, 4)] = { mcfg = mcfg_name, cpu = pick_parameter(lex, i, 1) }
+	 cpu_add(cpumap, pick_parameter(lex, i, 3), mcfg_name, pick_parameter(lex, i, 1))
+	 cpu_add(cpumap, pick_parameter(lex, i, 4), mcfg_name, pick_parameter(lex, i, 1))
       end
       if t == "ADDRESS_MAP_START" then
 	 cur_map = pick_parameter(lex, i, 1)
@@ -129,7 +144,7 @@ for j=1,#files do
       if t == "DEVICE_ADDRESS_MAP_START" then
 	 in_dam = true
       end
-      if t == "AM_READ" or t == "AM_WRITE" or t == "AM_READ8" or t == "AM_WRITE8" or t == "AM_READ16" or t == "AM_WRITE16" or t == "AM_READ32" or t == "AM_WRITE32" then
+      if t == "AM_READ" or t == "AM_WRITE" or t == "AM_READ8" or t == "AM_WRITE8" or t == "AM_READ16" or t == "AM_WRITE16" or t == "AM_READ32" or t == "AM_WRITE32" or t == "AM_RAM_WRITE" or t == "AM_RAM_READ" then
 	 if not in_dam then
 	    mth_add(mthmap, pick_parameter(lex, i, 1), cur_map, cur_mapclass)
 	 end

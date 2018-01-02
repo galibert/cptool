@@ -17,7 +17,16 @@ for l in io.lines("methods-to-devices.txt") do
    if not method_to_devices[key] then
       method_to_devices[key] = {}
    end
-   method_to_devices[key][#method_to_devices[key]+1] = tag
+   local mtd = method_to_devices[key]
+   local needed = true
+   for j=1,#mtd do
+      if mtd[j] == tag then
+	 needed = false
+      end
+   end
+   if needed then
+      mtd[#mtd+1] = tag
+   end
 end
 
 function lookup_devices(m, c)
@@ -43,6 +52,24 @@ function lookup_devices(m, c)
       end
    end
    return r
+end
+
+function lookup_var(c, t)
+   local key = c .. " " .. t
+   if devices_from_tag[key] then
+      return devices_from_tag[key]
+   end
+   if not inheritance_info[c] then
+      return nil
+   end
+   local inh = inheritance_info[c]
+   for i=1,#inh do
+      local r1 = lookup_var(inh[i], t)
+      if r1 then
+	 return r1
+      end
+   end
+   return nil
 end
 
 for fi=1,#files do
@@ -86,11 +113,10 @@ for fi=1,#files do
 		  print(string.format("- %s", devs[k]))
 	       end
 	    else
-	       local key2 = c .. " " .. devs[1]
-	       if not devices_from_tag[key2] then
-		  print("No variable associated to device " .. key2)
+	       local var = lookup_var(c, devs[1])
+	       if not var then
+		  print("No variable associated to device " .. c .. " " .. devs[1])
 	       else
-		  local var = devices_from_tag[key2]
 		  if lex[i+5].token == "." then
 		     i = lex:replace(i, i+5, var .. "->")
 		     if lex[i+1].token == "safe_pc" then

@@ -1,0 +1,210 @@
+No device associated to threecom3c505_device read
+No device associated to hp98034_io_card_device reg_r
+No device associated to hp98034_io_card_device reg_w
+No device associated to amiga_autoconfig autoconfig_read
+No device associated to amiga_autoconfig autoconfig_write
+No device associated to hp_1mb5_device cpu_w
+No device associated to hp_1mb5_device uc_r
+No device associated to hp_1mb5_device uc_w
+No device associated to es5510_device host_r
+Multiple devices associated to saturn_state saturn_vdp1_regs_r
+- "maincpu"
+- "slave"
+No device associated to snes_state snes_open_bus_r
+No device associated to segas32_state darkedge_protection_w
+No device associated to segas32_state darkedge_protection_r
+No device associated to segas32_state arabfgt_protection_r
+No device associated to leland_state alleymas_joystick_kludge
+No device associated to leland_state leland_master_input_r
+No device associated to leland_state leland_master_output_w
+No device associated to pgm_arm_type1_state pgm_arm7_type1_ram_r
+No device associated to pgm_arm_type1_state pgm_arm7_type1_ram_w
+No device associated to pgm_arm_type1_state pgm_arm7_type1_shareram_r
+No device associated to pgm_arm_type1_state pgm_arm7_type1_shareram_w
+No device associated to pgm_arm_type1_state pgm_arm7_type1_sim_w
+No device associated to cyclwarr_state cyclwarr_control_w
+No device associated to midway_ioasic_device fifo_status_r
+No variable associated to device rmnimbus_state MAINCPU_TAG
+No variable associated to device rmnimbus_state MAINCPU_TAG
+No variable associated to device rmnimbus_state MAINCPU_TAG
+No variable associated to device rmnimbus_state MAINCPU_TAG
+No variable associated to device rmnimbus_state IOCPU_TAG
+No variable associated to device rmnimbus_state IOCPU_TAG
+No variable associated to device rmnimbus_state IOCPU_TAG
+No variable associated to device rmnimbus_state IOCPU_TAG
+No variable associated to device rmnimbus_state MAINCPU_TAG
+No variable associated to device rmnimbus_state MAINCPU_TAG
+No device associated to taitosj_state spacecr_prot_r
+No device associated to nb1413m3_device sndrom_r
+Multiple devices associated to sms_state sms_mem_control_w
+- "maincpu"
+- "control"
+No device associated to midxunit_state midxunit_sound_r
+No device associated to midxunit_state midxunit_sound_w
+No device associated to tigeroad_state f1dream_control_w
+Multiple devices associated to bebox_state bebox_cpu0_imask_w
+- "ppc1"
+- "ppc2"
+Multiple devices associated to bebox_state bebox_cpu1_imask_w
+- "ppc1"
+- "ppc2"
+No device associated to bub68705_state port_b_w
+No device associated to pgm_asic3_state pgm_asic3_w
+No device associated to xevious_state battles_customio0_r
+No device associated to xevious_state battles_customio0_w
+No device associated to xevious_state battles_customio_data0_r
+No device associated to xevious_state battles_customio_data0_w
+No device associated to mexico86_state mexico86_68705_port_b_w
+No device associated to hp48_state hp49_bank_w
+No device associated to balsente_state grudge_steering_r
+No device associated to midyunit_state term2_hack_w
+No device associated to midyunit_state term2la3_hack_w
+No device associated to midyunit_state term2la2_hack_w
+No device associated to midyunit_state term2la1_hack_w
+No device associated to pgm_arm_type2_state arm7_latch_arm_r
+No device associated to pgm_arm_type2_state arm7_latch_arm_w
+No device associated to pgm_arm_type2_state arm7_shareram_r
+No device associated to pgm_arm_type2_state arm7_shareram_w
+No device associated to pgm_arm_type2_state arm7_latch_68k_r
+No device associated to pgm_arm_type2_state arm7_latch_68k_w
+No device associated to pgm_arm_type2_state arm7_ram_r
+No device associated to pgm_arm_type2_state arm7_ram_w
+No device associated to pgm_arm_type2_state kov2_arm_region_w
+No device associated to pgm_arm_type2_state kov2p_arm_region_w
+No device associated to pgm_arm_type2_state martmast_arm_region_w
+No device associated to pgm_arm_type2_state ddp2_speedup_r
+No device associated to pgm_arm_type2_state ddp2_main_speedup_r
+No device associated to apollo_state apollo_dma_2_r
+No device associated to midwunit_state umk3_palette_hack_w
+No device associated to st0016_cpu_device st0016_vregs_w
+No device associated to pgm_arm_type3_state svg_latch_68k_w
+No device associated to pgm_arm_type3_state svg_latch_68k_r
+No device associated to pgm_arm_type3_state svg_latch_arm_r
+No device associated to pgm_arm_type3_state svg_latch_arm_w
+No device associated to pgm_arm_type3_state theglad_speedup_r
+No device associated to pgm_arm_type3_state happy6_speedup_r
+No device associated to pgm_arm_type3_state svg_speedup_r
+No device associated to pgm_arm_type3_state svgpcb_speedup_r
+No device associated to pgm_arm_type3_state killbldp_speedup_r
+No device associated to pgm_arm_type3_state dmnfrnt_speedup_r
+No device associated to pgm_arm_type3_state dmnfrnt_main_speedup_r
+No device associated to decocass_type1_state decocass_type1_r
+No device associated to decocass_type2_state decocass_type2_r
+No device associated to decocass_type2_state decocass_type2_w
+No device associated to decocass_type3_state decocass_type3_r
+No device associated to decocass_type3_state decocass_type3_w
+No device associated to decocass_type4_state decocass_type4_r
+No device associated to decocass_type4_state decocass_type4_w
+No device associated to decocass_type5_state decocass_type5_r
+No device associated to decocass_type5_state decocass_type5_w
+No device associated to decocass_nodong_state decocass_nodong_r
+No device associated to decocass_widel_state decocass_widel_r
+No device associated to decocass_widel_state decocass_widel_w
+No device associated to decocass_state i8041_p1_w
+No device associated to decocass_state i8041_p1_r
+No device associated to decocass_state i8041_p2_w
+No device associated to decocass_state i8041_p2_r
+No device associated to mpu4_state characteriser_w
+No device associated to mpu4_state characteriser_r
+No variable associated to device mpu4_state "video"
+No device associated to dec0_state hippodrm_68000_share_r
+No device associated to mac_state mac_via_out_b_egadb
+No device associated to mac_state mac_via_out_b_cdadb
+No device associated to kaneko_toybox_device mcu_status_r
+No device associated to arkanoid_state arkanoid_bootleg_f000_r
+No device associated to arkanoid_state arkanoid_bootleg_f002_r
+No device associated to arkanoid_state arkanoid_bootleg_d018_w
+No device associated to arkanoid_state arkanoid_bootleg_d008_r
+No device associated to midtunit_state mk_prot_r
+No device associated to midtunit_state mk_prot_w
+No device associated to midtunit_state jdredd_prot_w
+No device associated to midtunit_state jdredd_prot_r
+No device associated to archimedes_state ioc_ctrl_r
+No device associated to archimedes_state ioc_ctrl_w
+No device associated to sega_16bit_common_base open_bus_r
+No device associated to namcos1_state key_type3_r
+Multiple devices associated to namcond1_state cuskey_r
+- "maincpu"
+- "mcu"
+No variable associated to device harddriv_state "gsp"
+No device associated to harddriv_state hd68k_adsp_data_w
+No device associated to harddriv_state hd68k_adsp_control_w
+No device associated to harddriv_state hd68k_adsp_irq_clear_w
+No device associated to harddriv_state hd68k_adsp_irq_state_r
+No variable associated to device harddriv_state "adsp"
+No variable associated to device harddriv_state "adsp"
+No device associated to harddriv_state hd68k_ds3_control_w
+No device associated to harddriv_state hd68k_ds3_gdata_r
+No device associated to harddriv_state hd68k_ds3_gdata_w
+No device associated to harddriv_state hd68k_ds3_sirq_clear_w
+No device associated to harddriv_state hd68k_ds3_sdata_r
+No variable associated to device harddriv_state "adsp"
+No device associated to harddriv_state hdgsp_speedup_r
+No device associated to harddriv_state rdgsp_speedup1_r
+No device associated to harddriv_state rdgsp_speedup1_w
+No device associated to harddriv_state hdmsp_speedup_r
+No device associated to harddriv_state hdadsp_speedup_r
+No device associated to harddriv_state hdds3_speedup_r
+No device associated to hng64_state hng64_sound_bank_w
+No device associated to hng64_state hng64_sound_port_000a_w
+No device associated to hng64_state hng64_sound_port_000c_w
+No device associated to mw8080bw_state gunfight_audio_w
+No device associated to atari_cage_device speedup_w
+Multiple devices associated to jaguar_state jerry_regs_r
+- "maincpu"
+- "dsp"
+- "gpu"
+Multiple devices associated to jaguar_state jerry_regs_w
+- "maincpu"
+- "dsp"
+- "gpu"
+No device associated to jaguar_state dsp_flags_w
+Multiple devices associated to jaguar_state serial_r
+- "maincpu"
+- "dsp"
+- "gpu"
+Multiple devices associated to jaguar_state serial_w
+- "maincpu"
+- "dsp"
+- "gpu"
+No device associated to dcs_audio_device dcs_polling_r
+No device associated to dcs_audio_device dcs_polling32_r
+No device associated to harddriv_sound_board_device hd68k_snd_data_r
+No device associated to harddriv_sound_board_device hd68k_snd_data_w
+No device associated to harddriv_sound_board_device hd68k_snd_reset_w
+No device associated to harddriv_sound_board_device hdsnd68k_data_r
+No device associated to harddriv_sound_board_device hdsnd68k_data_w
+No device associated to harddriv_sound_board_device hdsnd68k_switches_r
+No device associated to harddriv_sound_board_device hdsnd68k_320port_r
+No device associated to harddriv_sound_board_device hdsnd68k_status_r
+No device associated to harddriv_sound_board_device hdsnd68k_speech_w
+No device associated to harddriv_sound_board_device hdsnd68k_320com_r
+No device associated to harddriv_sound_board_device hdsnd68k_320com_w
+No device associated to harddriv_sound_board_device hdsnddsp_comport_w
+No device associated to harddriv_sound_board_device hdsnddsp_mute_w
+No device associated to harddriv_sound_board_device hdsnddsp_compare_r
+Multiple devices associated to itech8_state blitter_r
+- "maincpu"
+- "sub"
+No device associated to tia_video_device WSYNC_w
+No variable associated to device rmnimbus_state MAINCPU_TAG
+No variable associated to device rmnimbus_state MAINCPU_TAG
+No device associated to kaneko_grap2_device galpani3_regs1_r
+Multiple devices associated to jaguar_state blitter_r
+- "maincpu"
+- "dsp"
+- "gpu"
+Multiple devices associated to jaguar_state blitter_w
+- "maincpu"
+- "dsp"
+- "gpu"
+Multiple devices associated to jaguar_state tom_regs_r
+- "maincpu"
+- "dsp"
+- "gpu"
+Multiple devices associated to jaguar_state tom_regs_w
+- "maincpu"
+- "dsp"
+- "gpu"
+No device associated to k001005_device read
+No device associated to k001005_device write

@@ -2,7 +2,7 @@ dofile("lib.lua")
 
 inheritance_load("inheritance.txt")
 
-files = filter_files(cp.scan(arg[1] .. "/src/mame/drivers"), { ".cpp", ".hxx", ".c", ".h", ".hpp" })
+files = filter_files(cp.scan(arg[1] .. "/src"), { ".cpp", ".hxx", ".c", ".h", ".hpp" })
 
 local devices_from_tag = {}
 for l in io.lines("devices-in-drivers.txt") do

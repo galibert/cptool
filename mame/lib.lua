@@ -130,7 +130,7 @@ end
 
 function lmatch(lex, index, tokens)
    for i=1,#tokens do
-      if tokens[i] == "" or lex[index+i-1].token ~= tokens[i] then
+      if tokens[i] ~= "" and lex[index+i-1].token ~= tokens[i] then
 	 return false
       end
    end

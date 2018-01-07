@@ -50,10 +50,11 @@ int Token::luaopen(lua_State *L)
 int Parse::luaopen(lua_State *L)
 {
   static const luaL_Reg m[] = {
-    { "__gc",    l_gc  },
-    { "__len",   l_len },
-    { "str",     l_str },
-    { "replace", l_replace },
+    { "__gc",               l_gc },
+    { "__len",              l_len },
+    { "str",                l_str },
+    { "replace",            l_replace },
+    { "insert_line_before", l_insert_line_before },
     { }
   };
   
@@ -86,6 +87,35 @@ int Parse::replace(int start, int end, std::string source)
   return epos;
 }
 
+int Parse::track_nl_bw(int pos) const
+{
+  while(pos > 0) {
+    auto ws = tokens[pos]->ws();
+    if(ws.find('\n') != std::string::npos)
+      return pos;
+    pos--;
+  }
+  abort();
+}
+
+int Parse::insert_line_before(int pos, std::string source)
+{
+  std::vector<Token *> toks;
+  do_parse(source, toks);
+  int p1 = track_nl_bw(pos);
+  int p2 = track_nl_bw(p1-1);
+  std::string sp1 = tokens[p1]->ws();
+  std::string sp2 = tokens[p2]->ws();
+  int np1 = sp1.rfind('\n');
+  int np2 = sp2.rfind('\n');
+  toks[0]->set_ws(std::string(sp1.begin(), sp1.begin() + np1 + 1) + std::string(sp2.begin() + np2 + 1, sp2.end()));
+  tokens[p1]->set_ws(std::string(sp1.begin() + np1, sp1.end()));
+  tokens.insert(tokens.begin() + p1, toks.begin(), toks.end());
+  for(unsigned int i = p1; i != tokens.size(); i++)
+    tokens[i]->set_index(i);
+  return pos + toks.size();
+}
+
 std::string Parse::str() const
 {
   std::ostringstream out;
@@ -102,6 +132,17 @@ int Parse::l_replace(lua_State *L)
   luaL_argcheck(L, lua_isstring(L, 4), 4, "replacement string expected");
 
   int pos = p->replace(lua_tointeger(L, 2), lua_tointeger(L, 3), lua_tostring(L, 4));
+  lua_pushnumber(L, pos);
+  return 1;
+}
+
+int Parse::l_insert_line_before(lua_State *L)
+{
+  Parse *p = getparam(L, 1);
+  luaL_argcheck(L, lua_isnumber(L, 2), 2, "position expected");
+  luaL_argcheck(L, lua_isstring(L, 3), 3, "replacement string expected");
+
+  int pos = p->insert_line_before(lua_tointeger(L, 2), lua_tostring(L, 3));
   lua_pushnumber(L, pos);
   return 1;
 }

@@ -53,7 +53,10 @@ private:
   bool prefix(std::string::const_iterator &p, std::string::const_iterator e, int &line, int &col, const char *pref) const;
   bool prefixp(std::string::const_iterator p, std::string::const_iterator e, const char *pref) const;
   int replace(int start, int end, std::string source);
+  int insert_line_before(int pos, std::string source);
   std::string str() const;
+
+  int track_nl_bw(int pos) const;
 
   inline bool is_ws(char c) const;
   inline bool is_bin(char c) const;
@@ -67,6 +70,7 @@ private:
   static int l_len(lua_State *L);
   static int l_index(lua_State *L);
   static int l_replace(lua_State *L);
+  static int l_insert_line_before(lua_State *L);
   static int l_str(lua_State *L);
 };
 

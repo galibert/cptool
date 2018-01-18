@@ -47,6 +47,29 @@ function pick_parameter(lex, idx, number)
    return range_rebuild(lex, idx, idxe)
 end
 
+function set_parameter(lex, idx, number, text)
+   if lex[idx+1].token ~= "(" then
+      return false
+   end
+   idx = idx + 2
+   while number ~= 1 do
+      idx = skip_parameter(lex, idx)
+      if not idx then
+	 return false
+      end
+      idx = idx + 1
+      number = number - 1
+   end
+
+   local idxe = skip_parameter(lex, idx)
+   if not idxe then
+      return false
+   end
+
+   lex:replace(idx, idxe-1, text)
+   return true
+end
+
 function unstring(str)
    local i1, i2
    for i=1,#str do

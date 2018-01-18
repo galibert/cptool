@@ -32,7 +32,7 @@ function pick_parameter(lex, idx, number)
    idx = idx + 2
    while number ~= 1 do
       idx = skip_parameter(lex, idx)
-      if not idx then
+      if not idx or lex[idx].token == ")" then
 	 return nil
       end
       idx = idx + 1
@@ -158,4 +158,12 @@ function lmatch(lex, index, tokens)
       end
    end
    return true
+end
+
+function make_hash(l)
+   local h = {}
+   for i=1,#l do
+      h[l[i]] = true
+   end
+   return h
 end

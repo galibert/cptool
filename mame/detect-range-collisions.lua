@@ -49,7 +49,17 @@ function check(f, n, r)
       for j=i+1,#r do
 	 if r[i][1] and r[i][2] and r[j][1] and r[j][2] then
 	    if ((r[i].w and r[j].w) or (r[i].r and r[j].r)) and (not r[i].mask or not r[j].mask or (r[i].mask & r[j].mask) ~= 0) and not (r[i][1] > r[j][2] or r[i][2] < r[j][1]) then
-	       print(string.format("%s %s %x-%x %x vs. %x-%x %x", f, n, r[i][1], r[i][2], r[i].mask or 0, r[j][1], r[j][2], r[j].mask or 0))
+	       local s1 = r[i][2] - r[i][1]
+	       local s2 = r[j][2] - r[j][1]
+	       local mode
+	       if s1 > s2 then
+		  mode = "-"
+	       elseif s1 < s2 then
+		  mode = "+"
+	       else
+		  mode = "="
+	       end
+	       print(string.format("%s %s %s %x-%x %x vs. %x-%x %x", mode, f, n, r[i][1], r[i][2], r[i].mask or 0, r[j][1], r[j][2], r[j].mask or 0))
 	    end
 	 end
       end

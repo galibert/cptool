@@ -536,7 +536,7 @@ void Parse::do_parse(std::string source, std::vector<Token *> &toks)
 	    else
 	      break;
 	  }
-	  if(p != e && (*p == '.' || (*p == 'p' || *p == 'P'))) {
+	  if(p != e && (*p == '.' || (*p == 'e' || *p == 'E'))) {
 	    // Floating point, no suffixes
 	    if(*p == '.') {
 	      step(p, line, col);
@@ -552,7 +552,7 @@ void Parse::do_parse(std::string source, std::vector<Token *> &toks)
 		else
 		  break;
 	      }
-	      if(p == e || (*p != 'p' && *p != 'P'))
+	      if(p == e || (*p != 'e' && *p != 'E'))
 		goto token_done;
 	    }
 	    step(p, line, col);

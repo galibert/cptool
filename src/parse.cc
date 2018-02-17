@@ -427,7 +427,7 @@ void Parse::do_parse(std::string source, std::vector<Token *> &toks)
       if(is_dec(*p)) {
 	bool hexp = prefix(p, e, line, col, "0x") || prefix(p, e, line, col, "0X");
 	bool binp = !hexp && (prefix(p, e, line, col, "0b") || prefix(p, e, line, col, "0B"));
-	bool octp = (!prefixp(p, e, "0.")) && prefix(p, e, line, col, "0");
+	bool octp = !hexp && !binp && (!prefixp(p, e, "0.")) && prefix(p, e, line, col, "0");
 
 	if(binp) {
 	  if(p != e && is_bin(*p)) {

@@ -51,10 +51,13 @@ static void do_scan(lua_State *L, std::string path, int &index)
 
 static int l_scan(lua_State *L)
 {
-  std::string root(luaL_checkstring(L, 1));
+  int count = lua_gettop(L);
   lua_newtable(L);
   int index = 1;
-  do_scan(L, root, index);
+  for(int i=1; i<=count; i++) {
+    std::string root(luaL_checkstring(L, i));
+    do_scan(L, root, index);
+  }
   return 1;
 }
 

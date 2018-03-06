@@ -47,6 +47,23 @@ function pick_parameter(lex, idx, number)
    return range_rebuild(lex, idx, idxe)
 end
 
+
+function pos_parameter(lex, idx, number)
+   if lex[idx+1].token ~= "(" then
+      return nil
+   end
+   idx = idx + 2
+   while number ~= 1 do
+      idx = skip_parameter(lex, idx)
+      if not idx or lex[idx].token == ")" then
+	 return nil
+      end
+      idx = idx + 1
+      number = number - 1
+   end
+   return idx
+end
+
 function set_parameter(lex, idx, number, text)
    if lex[idx+1].token ~= "(" then
       return false

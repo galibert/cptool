@@ -169,12 +169,26 @@ function list_derivatives_of(class)
 end
 
 function lmatch(lex, index, tokens)
+   local cpos = index
    for i=1,#tokens do
-      if tokens[i] ~= "" and lex[index+i-1].token ~= tokens[i] then
-	 return false
+      if cpos > #lex then
+	 return nil
+      end
+      if tokens[i] == "" and tokens[i+1] and tokens[i+1] ~= "" then
+	 cpos = cpos + 1
+	 while cpos <= #lex and lex[cpos].token ~= tokens[i+1] do
+	    cpos = cpos + 1
+	 end
+      elseif tokens[i] == "" then
+	 cpos = cpos + 1
+      else
+	 if tokens[i] ~= lex[cpos].token then
+	    return nil
+	 end
+	 cpos = cpos + 1
       end
    end
-   return true
+   return cpos
 end
 
 function make_hash(l)

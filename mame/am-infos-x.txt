@@ -1,0 +1,1 @@
+stbook_state::stbook_map 16 24 0 1

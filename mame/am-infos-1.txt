@@ -108,7 +108,6 @@ a51xx_state::a5130_io Z80 AS_IO
 a51xx_state::a5130_mem Z80 AS_PROGRAM
 a600_state::a600_mem M68000 AS_PROGRAM
 a600_state::overlay_2mb_map16 16 22 0 1
-a6809_state::a6809_io MC6809 AS_IO
 a6809_state::a6809_mem MC6809 AS_PROGRAM
 a7150_state::a7150_io I8086 AS_IO
 a7150_state::a7150_mem I8086 AS_PROGRAM
@@ -495,7 +494,7 @@ astrocde_state::port_map_16col_pattern_nosound Z80 AS_IO
 astrocde_state::port_map_16col_pattern_tenpindx Z80 AS_IO
 astrocde_state::port_map_mono_pattern Z80 AS_IO
 astrocde_state::port_map_stereo_pattern Z80 AS_IO
-astrocde_state::profpac_bank4000_map 0 20 0 0
+astrocde_state::profpac_bank4000_map 8 20 0 0
 astrocde_state::profpac_map Z80 AS_PROGRAM
 astrocde_state::robby_map Z80 AS_PROGRAM
 astrocde_state::seawolf2_map Z80 AS_PROGRAM
@@ -536,7 +535,7 @@ at_state::at32l_map I386 AS_PROGRAM
 at_state::at32l_map I486 AS_PROGRAM
 at_state::ficpio_io I486 AS_IO
 at_state::ficpio_map I486 AS_PROGRAM
-at_state::neat_io I386 AS_IO
+at_state::neat_io I386SX AS_IO
 at_state::neat_io I80286 AS_IO
 at_state::ps1_16_io I80286 AS_IO
 atari_cage_device::cage_map TMS32031 AS_PROGRAM
@@ -1351,7 +1350,6 @@ comquest_state::comquest_mem M6805 AS_PROGRAM
 comx35_state::cdp1869_page_ram CDP1869 0
 comx35_state::comx35_io CDP1802 AS_IO
 comx35_state::comx35_mem CDP1802 AS_PROGRAM
-comx_pl80_device::comxpl80_io M6805 AS_IO
 comx_pl80_device::comxpl80_mem M6805 AS_PROGRAM
 concept_state::concept_memmap M68000 AS_PROGRAM
 contra_state::contra_map HD6309E AS_PROGRAM
@@ -1401,7 +1399,6 @@ cortex_state::mem_map TMS9995 AS_PROGRAM
 cosmic_state::cosmica_map Z80 AS_PROGRAM
 cosmic_state::cosmicg_io_map TMS9980A AS_IO
 cosmic_state::cosmicg_map TMS9980A AS_PROGRAM
-cosmic_state::magspot_map TMS9980A AS_PROGRAM
 cosmic_state::magspot_map Z80 AS_PROGRAM
 cosmic_state::panic_map Z80 AS_PROGRAM
 cosmicos_state::cosmicos_io CDP1802 AS_IO
@@ -1910,13 +1907,13 @@ dynax_state::jantouki_sound_io_map Z80 AS_IO
 dynax_state::jantouki_sound_mem_map Z80 AS_PROGRAM
 dynax_state::mcnpshnt_io_map Z80 AS_IO
 dynax_state::mcnpshnt_mem_map Z80 AS_PROGRAM
-dynax_state::mjangels_banked_map 0 21 0 0
+dynax_state::mjangels_banked_map 8 21 0 0
 dynax_state::mjdialq2_mem_map Z80 AS_PROGRAM
-dynax_state::mjelctrn_banked_map 0 32 0 0
+dynax_state::mjelctrn_banked_map 8 32 0 0
 dynax_state::mjelctrn_io_map TMPZ84C015 AS_IO
 dynax_state::mjembase_io_map Z80 AS_IO
 dynax_state::mjfriday_io_map Z80 AS_IO
-dynax_state::nanajign_banked_map 0 32 0 0
+dynax_state::nanajign_banked_map 8 32 0 0
 dynax_state::nanajign_io_map Z80 AS_IO
 dynax_state::nanajign_mem_map TMPZ84C015 AS_PROGRAM
 dynax_state::nanajign_mem_map Z80 AS_PROGRAM
@@ -1925,7 +1922,7 @@ dynax_state::sprtmtch_io_map Z80 AS_IO
 dynax_state::sprtmtch_mem_map Z80 AS_PROGRAM
 dynax_state::tenkai_banked_map 8 20 0 0
 dynax_state::tenkai_map TMP91640 AS_PROGRAM
-dynax_state::yarunara_banked_map 0 32 0 0
+dynax_state::yarunara_banked_map 8 32 0 0
 dynax_state::yarunara_io_map Z80 AS_IO
 dynax_state::yarunara_mem_map Z80 AS_PROGRAM
 dynduke_state::master_map V30 AS_PROGRAM
@@ -2532,7 +2529,6 @@ giclassicsvr_state::server_main M68000 AS_PROGRAM
 gijoe_state::gijoe_map M68000 AS_PROGRAM
 gijoe_state::sound_map Z80 AS_PROGRAM
 gimix_state::gimix_banked_mem 8 32 0 0
-gimix_state::gimix_io MC6809 AS_IO
 gimix_state::gimix_mem MC6809 AS_PROGRAM
 ginganin_state::ginganin_map M68000 AS_PROGRAM
 ginganin_state::sound_map MC6809 AS_PROGRAM
@@ -2601,9 +2597,7 @@ gottlieb_sound_r2_device::gottlieb_speech_r2_map M6502 AS_PROGRAM
 gottlieb_state::gottlieb_map I8088 AS_PROGRAM
 gottlieb_state::reactor_map I8088 AS_PROGRAM
 gotya_state::gotya_map Z80 AS_PROGRAM
-goupil_g1_state::goupil_io M6808 AS_IO
 goupil_g1_state::goupil_mem M6808 AS_PROGRAM
-goupil_g2_state::goupil_g2_io M6808 AS_IO
 goupil_g2_state::goupil_g2_mem M6808 AS_PROGRAM
 gp2x_state::gp2x_map ARM9 AS_PROGRAM
 gp32_state::gp32_map ARM9 AS_PROGRAM
@@ -4032,7 +4026,6 @@ mikrosha_state::mikrosha_io I8080 AS_IO
 mikrosha_state::mikrosha_mem I8080 AS_PROGRAM
 mil4000_state::chewheel_map M68000 AS_PROGRAM
 mil4000_state::mil4000_map M68000 AS_PROGRAM
-milton_state::io_map M6805 AS_IO
 milton_state::prg_map M6805 AS_PROGRAM
 milwaukee_state::mem_map M6502 AS_PROGRAM
 mini2440_state::mini2440_map ARM920T AS_PROGRAM
@@ -4073,7 +4066,6 @@ mk1_state::mk1_mem F8 AS_PROGRAM
 mk2_state::mk2_mem M6504 AS_PROGRAM
 mk85_state::mk85_mem K1801VM2 AS_PROGRAM
 mk90_state::mk90_mem K1801VM2 AS_PROGRAM
-mkit09_state::mkit09_io MC6809 AS_IO
 mkit09_state::mkit09_mem MC6809 AS_PROGRAM
 mkit09_state::mkit09a_mem MC6809 AS_PROGRAM
 mlanding_state::audio_map_io Z80 AS_IO
@@ -4742,7 +4734,6 @@ norautp_state::kimble_map Z80 AS_PROGRAM
 norautp_state::newhilop_map Z80 AS_PROGRAM
 norautp_state::norautp_map Z80 AS_PROGRAM
 norautp_state::norautp_portmap I8080 AS_IO
-norautp_state::norautp_portmap Z80 AS_IO
 norautp_state::norautx4_map Z80 AS_PROGRAM
 norautp_state::norautxp_map Z80 AS_PROGRAM
 norautp_state::nortest1_map Z80 AS_PROGRAM
@@ -4801,7 +4792,6 @@ o2_chess_device::chess_io NSC800 AS_IO
 o2_chess_device::chess_mem NSC800 AS_PROGRAM
 ob68k1a_state::ob68k1a_mem M68000 AS_PROGRAM
 octopus_state::octopus_io I8088 AS_IO
-octopus_state::octopus_mem 8 32 0 0
 octopus_state::octopus_mem I8088 AS_PROGRAM
 octopus_state::octopus_sub_io Z80 AS_IO
 octopus_state::octopus_sub_mem Z80 AS_PROGRAM
@@ -5044,7 +5034,6 @@ pc9801_state::pc9801rs_map I386SX AS_PROGRAM
 pc9801_state::pc9801ux_io I80286 AS_IO
 pc9801_state::pc9801ux_io V30 AS_IO
 pc9801_state::pc9801ux_map I80286 AS_PROGRAM
-pc9801_state::pc9801ux_map V30 AS_PROGRAM
 pc9801_state::pc9821_io I486 AS_IO
 pc9801_state::pc9821_io PENTIUM AS_IO
 pc9801_state::pc9821_map I486 AS_PROGRAM
@@ -6573,7 +6562,6 @@ spyhuntertec_state::spyhuntertec_map Z80 AS_PROGRAM
 spyhuntertec_state::spyhuntertec_portmap Z80 AS_IO
 spyhuntertec_state::spyhuntertec_sound_map Z80 AS_PROGRAM
 spyhuntertec_state::spyhuntertec_sound_portmap Z80 AS_IO
-squale_state::squale_io MC6809 AS_IO
 squale_state::squale_mem MC6809 AS_PROGRAM
 sraider_state::sraider_cpu1_map Z80 AS_PROGRAM
 sraider_state::sraider_cpu2_io_map Z80 AS_IO
@@ -6846,15 +6834,14 @@ svision_state::svision_mem M65C02 AS_PROGRAM
 svision_state::tvlink_mem M65C02 AS_PROGRAM
 svmu_state::svmu_io_mem LC8670 AS_IO
 svmu_state::svmu_mem LC8670 AS_PROGRAM
-swtpc09_state::flex_dc4_piaide_mem 0 32 0 0
-swtpc09_state::flex_dmf2_mem 0 32 0 0
+swtpc09_state::flex_dc4_piaide_mem 8 32 0 1
+swtpc09_state::flex_dmf2_mem 8 32 0 1
 swtpc09_state::mp09_mem MC6809 AS_PROGRAM
-swtpc09_state::uniflex_dmf2_mem 0 32 0 0
-swtpc09_state::uniflex_dmf3_mem 0 32 0 0
+swtpc09_state::uniflex_dmf2_mem 8 32 0 1
+swtpc09_state::uniflex_dmf3_mem 8 32 0 1
 swtpc_state::mem_map M6800 AS_PROGRAM
 swyft_state::swyft_mem M68008 AS_PROGRAM
 sym1_state::sym1_map M6502 AS_PROGRAM
-symbolics_state::m68k_io M68000 AS_IO
 symbolics_state::m68k_mem M68000 AS_PROGRAM
 sys2900_state::io_map Z80 AS_IO
 sys2900_state::mem_map Z80 AS_PROGRAM
@@ -7244,7 +7231,7 @@ thunderx_state::gbusters_map KONAMI AS_PROGRAM
 thunderx_state::scontra_bank5800_map 8 12 0 1
 thunderx_state::scontra_map KONAMI AS_PROGRAM
 thunderx_state::scontra_sound_map Z80 AS_PROGRAM
-thunderx_state::thunderx_bank5800_map 0 13 0 0
+thunderx_state::thunderx_bank5800_map 8 13 0 1
 thunderx_state::thunderx_map KONAMI AS_PROGRAM
 thunderx_state::thunderx_sound_map Z80 AS_PROGRAM
 ti630_state::i80c31_io I80C31 AS_IO
@@ -7263,9 +7250,9 @@ ti85_state::ti83_io Z80 AS_IO
 ti85_state::ti83p_asic_mem Z80 AS_PROGRAM
 ti85_state::ti83p_banked_mem 8 32 0 0
 ti85_state::ti83p_io Z80 AS_IO
-ti85_state::ti83pse_banked_mem 0 32 0 0
+ti85_state::ti83pse_banked_mem 8 32 0 0
 ti85_state::ti83pse_io Z80 AS_IO
-ti85_state::ti84p_banked_mem 0 32 0 0
+ti85_state::ti84p_banked_mem 8 32 0 0
 ti85_state::ti85_io Z80 AS_IO
 ti85_state::ti86_io Z80 AS_IO
 ti85_state::ti86_mem Z80 AS_PROGRAM
@@ -7610,7 +7597,6 @@ twin16_state::sound_map Z80 AS_PROGRAM
 twin16_state::sub_map M68000 AS_PROGRAM
 twincobr_state::DSP_io_map TMS32010 AS_IO
 twincobr_state::DSP_program_map TMS32010 AS_PROGRAM
-twincobr_state::fsharkbt_i8741_io_map I8741 AS_IO
 twincobr_state::main_program_map M68000 AS_PROGRAM
 twincobr_state::sound_io_map Z80 AS_IO
 twincobr_state::sound_program_map Z80 AS_PROGRAM
@@ -8049,7 +8035,7 @@ x07_state::x07_mem NSC800 AS_PROGRAM
 x1_state::x1_io Z80 AS_IO
 x1_state::x1_io_banks 8 17 0 0
 x1_state::x1_mem Z80 AS_PROGRAM
-x1_state::x1turbo_io_banks 0 32 0 0
+x1_state::x1turbo_io_banks 8 32 0 0
 x1_state::x1turbo_mem Z80 AS_PROGRAM
 x1twin_state::x1_io Z80 AS_IO
 x1twin_state::x1_io_banks 8 17 0 0
